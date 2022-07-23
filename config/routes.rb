@@ -8,4 +8,9 @@ Rails.application.routes.draw do
   get '/me', to: 'users#show'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
+  resources :games, only: [:index, :show]
+  # get '/games', to: 'games#index'
+  get '/reviews', to: 'reviews#index'
+  # get '/games/:id', to: 'games#show'
+  get '/users', to: 'users#index'
 end
