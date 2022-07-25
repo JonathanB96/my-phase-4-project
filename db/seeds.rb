@@ -83,7 +83,7 @@ game_11 = Game.create(
     image_url: "https://drive.google.com/uc?id=1mAmdjD7ZJxI9ywpI0Tk_DDDdVDcBvzZq" 
 )
 
-10.times do
+18.times do
 
     Review.create(
         comments: Faker::Lorem.paragraph,
