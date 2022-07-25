@@ -24,7 +24,8 @@ export default function NavBar() {
         to="/"
         exact
         activeStyle={{
-          background: "#000",
+            color: "#00C6A7",
+            
         }}
       >
         Home
@@ -34,25 +35,25 @@ export default function NavBar() {
         to="/news"
         exact
         activeStyle={{
-          background: "#000",
+            color: "#00C6A7",
         }}
       >
         News
       </NavLink></li>
     <li><NavLink
-        to="/login"
+        to="/games"
         exact
         activeStyle={{
-          background: "#000",
+            color: "#00C6A7",
         }}
       >
         Games
       </NavLink></li>
     <li> <NavLink
-        to="/addrecipe"
+        to="/Reviews"
         exact
         activeStyle={{
-          background: "#000",
+            color: "#00C6A7",
         }}
       >
         Reviews
@@ -65,7 +66,7 @@ export default function NavBar() {
         to="/signup"
         exact
         activeStyle={{
-          background: "#000",
+            color: "#00C6A7",
         }}
       >
         Sign Up
@@ -74,7 +75,7 @@ export default function NavBar() {
         to="/login"
         exact
         activeStyle={{
-          background: "#000",
+            color: "#00C6A7",
         }}
       >
         Login

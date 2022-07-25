@@ -34,6 +34,10 @@ body {
     color: #232323;
     transition: color 0.3s ease;
   }
+  #logo{
+    color: rgb(213, 120, 14);
+    /* font-family: ; */
+  }
   
   .menu-container a:hover {
     color: #00C6A7;
