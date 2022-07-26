@@ -14,7 +14,7 @@ export default function NavBar() {
   
 
     <a href="#" class="menu-logo">
-     <h1>Game<a id='logo'>land</a></h1>
+     <img src="https://drive.google.com/uc?id=16jXICbtnRv7XVMJ5UF6Irc-1n6iy_UH0"/>
     </a>
   
 
@@ -63,7 +63,7 @@ export default function NavBar() {
   <ul>
     
     <li> <NavLink 
-        to="/signup"
+        to="/register"
         exact
         activeStyle={{
             color: "#00C6A7",
@@ -72,7 +72,7 @@ export default function NavBar() {
         Sign Up
       </NavLink></li>
     <li><NavLink
-        to="/login"
+        to="/loginForm"
         exact
         activeStyle={{
             color: "#00C6A7",

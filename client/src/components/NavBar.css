@@ -9,7 +9,7 @@ body {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
-    background: #232323;
+    background: #000;
     color: #cdcdcd;
     padding: 20px;
     z-index: 1;
@@ -20,11 +20,11 @@ body {
   
   .menu-logo {
     line-height: 0;
-    margin: 0 20px;
+    margin: 0 10px;
   }
   
   .menu-logo img {
-    max-height: 40px;
+    max-height: 70px;
     max-width: 100px;
     flex-shrink: 0;
   }
@@ -34,10 +34,7 @@ body {
     color: #232323;
     transition: color 0.3s ease;
   }
-  #logo{
-    color: rgb(213, 120, 14);
-    /* font-family: ; */
-  }
+  
   
   .menu-container a:hover {
     color: #00C6A7;
@@ -109,6 +106,9 @@ body {
       flex-direction: column;
       align-items: flex-end;
     }
+    #logo2{
+      display: block
+    }
     
     .menu-logo {
       position: absolute;
@@ -118,7 +118,7 @@ body {
     }
   
     .menu-logo img {
-      max-height: 30px;
+      max-height: 200px;
     }
   
     .menu {
@@ -129,7 +129,7 @@ body {
       top: 0;
       margin: -20px;
       padding: 75px 50px 50px;
-      background: #cdcdcd;
+      background: #000;
       -webkit-font-smoothing: antialiased;
       /* to stop flickering of text in safari */
       transform-origin: 0% 0%;
@@ -147,6 +147,7 @@ body {
     .menu-container {
       width: 100%;
     }
+    
   
     .menu-container a {
       color: #cdcdcd;
