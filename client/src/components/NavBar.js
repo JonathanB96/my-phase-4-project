@@ -3,7 +3,16 @@ import { NavLink } from "react-router-dom";
 import { useHistory } from 'react-router';
 import './NavBar.css'
 
-export default function NavBar() {
+export default function NavBar({user, setUser}) {
+  
+  function handleLogoutClick() {
+    fetch("/logout", { method: "DELETE" }).then((r) => {
+      if (r.ok) {
+        setUser(null);
+      }
+    });
+  }
+  
   return (
     <div><nav class="menu-container">
 
@@ -69,16 +78,18 @@ export default function NavBar() {
             color: "#00C6A7",
         }}
       >
-        Sign Up
+      {user? user.username: "Sign Up"}
       </NavLink></li>
     <li><NavLink
         to="/loginForm"
+        className="button-76"
+        onClick={handleLogoutClick}
         exact
         activeStyle={{
             color: "#00C6A7",
         }}
       >
-        Login
+        {user? "Logout": "Login"}
       </NavLink></li>
     
   </ul>

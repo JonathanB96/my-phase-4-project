@@ -19,4 +19,5 @@ class SessionsController < ApplicationController
             render json: {errors: ["not authorized"]}, status: :unauthorized
         end
     end
+    
 end

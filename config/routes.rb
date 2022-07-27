@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   get '/reviews', to: 'reviews#index'
   # get '/games/:id', to: 'games#show'
   get '/users', to: 'users#index'
+
 end
