@@ -5,6 +5,7 @@ import Signup from './Signup';
 import Login from './Login'
 import Home from './Home';
 import News from './News';
+import GameList from './GameList';
 
 
 function App() {
@@ -27,6 +28,9 @@ function App() {
       <Switch>
       <Route exact path="/">
           <Home user={user}/>
+        </Route>
+        <Route exact path="/games">
+         <GameList/>
         </Route>
         <Route exact path="/register">
           <Signup/>
