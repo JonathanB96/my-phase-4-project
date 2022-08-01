@@ -33,10 +33,10 @@ function App() {
          <GameList/>
         </Route>
         <Route exact path="/register">
-          <Signup/>
+        {user?<Home user={user}/>:<Signup onLogin={setUser}/>} 
         </Route>
         <Route exact path="/loginForm"> 
-        <Login onLogin={setUser}/>         
+        {user?<Home user={user}/>:<Login onLogin={setUser}/>}               
         </Route>
         <Route exact path="/news">
           <News/>                    

@@ -8,7 +8,7 @@ export default function Login({onLogin}) {
   const[password, setPassword]=useState('')
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const history = useHistory()
+  // const history = useHistory()
   
 
   function handleUsername(e){
@@ -59,10 +59,6 @@ export default function Login({onLogin}) {
     <label><b>Password</b></label>
     <input type="password" value={password} onChange={handlePsw}
      placeholder="Enter Password" required/>
-
-    <label>
-      <input type="checkbox" checked="checked" name="remember" style={{"margin-bottom":"15px"}}/> Remember me
-    </label>
 
     <div className="clearfix">
       

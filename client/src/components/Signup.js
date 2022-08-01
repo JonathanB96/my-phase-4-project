@@ -2,12 +2,13 @@ import React, {useState}from 'react'
 import { useHistory } from 'react-router-dom'
 import "./Signup.css"
 
-export default function Signup() {
+export default function Signup({onLogin}) {
 
   const[username, setUsername]=useState('')
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [errors, setErrors] = useState([]);
+  const [isLoading, setIsLoading] = useState(false)
  
   function handleUsername(e){
     setUsername(e.target.value)
@@ -22,12 +23,36 @@ export default function Signup() {
     setPasswordConfirmation(e.target.value)
     
   }
-  const history = useHistory()
+  function handleSubmit(e) {
+    e.preventDefault();
+    setErrors([]);
+    setIsLoading(true);
+    fetch("/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username,
+        password,
+        password_confirmation: passwordConfirmation        
+      }),
+    }).then((r) => {
+      setIsLoading(false);
+      if (r.ok) {
+        r.json().then((user) => onLogin(user));
+        console.log("Signed up")
+      } else {
+        r.json().then((err) => setErrors(err.errors));
+      }
+    });
+  }
+
     
 
   return<>
   
-   <form  className="form-container">
+   <form  className="form-container" onSubmit={handleSubmit}>
     <div>
     <h1>Sign Up</h1>
     <p>Please fill in this form to create an account.</p>
@@ -45,15 +70,16 @@ export default function Signup() {
     <input type="password" value={passwordConfirmation} onChange={handlePsw2} 
     placeholder="Repeat Password" required/>
 
-    <label>
-      <input type="checkbox" checked="checked" name="remember" style={{"margin-bottom":"15px"}}/> Remember me
-    </label>
-
     <div className="clearfix">
       
       <button type="submit" className="signupbtn">Sign Up</button>
       <button type="button" className="cancelbtn">Cancel</button>
     </div>
+  </div>
+  <div>
+  {errors.map((err) => (
+          <p key={err}>{err}</p>
+        ))}
   </div>
 </form> 
   
