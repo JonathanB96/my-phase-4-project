@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import './GameCard.css'
 
 
-export default function GameCard({game, setGameUser, setGameComments, overlay}) {
+export default function GameCard({game, setGameReviews, setGameComments, setGameScore ,overlay}) {
   const [btn, setBtn] = useState(true)
 //   const [reviews, setReviews] = useState([])
 
@@ -12,6 +12,7 @@ export default function GameCard({game, setGameUser, setGameComments, overlay}) 
    console.log(game.users)
     setBtn(!btn)    
   }
+  setGameReviews(game.reviews)
   
   return<>
   <div className='card'>
