@@ -1,10 +1,14 @@
 import React, {useState}from 'react'
+import { useHistory } from 'react-router-dom'
 import "./Signup.css"
 
-export default function Login() {
+export default function Login({onLogin}) {
 
   const[username, setUsername]=useState('')
-  const[psw, setPsw]=useState('')
+  const[password, setPassword]=useState('')
+  const [errors, setErrors] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const history = useHistory()
   
 
   function handleUsername(e){
@@ -13,24 +17,47 @@ export default function Login() {
   }
 
   function handlePsw(e){
-    setPsw(e.target.value)
+    setPassword(e.target.value)
     
   }
+  
+  
+  function handleSubmit(e) {
+    e.preventDefault();
     
+    setIsLoading(true);
+    fetch("/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password}),
+    }).then((r) => {
+      setIsLoading(false);
+     
+      // history.push('/')
+      if (r.ok) {
+        r.json().then((user) => onLogin(user));
+        console.log("logged in!")
+      } else {
+        r.json().then((err) => setErrors(err.errors));
+      }
+    });
+  }
 
   return<>
-   <form >
+   <form onSubmit={handleSubmit}>
     <div className="form-container">
     <h1>Login</h1>
    
     <hr/>
 
-    <label><b>Email</b></label>
+    <label><b>Username</b></label>
     <input type="text" value={username} onChange={handleUsername}
      placeholder="Enter Username"required/>
 
     <label><b>Password</b></label>
-    <input type="password" value={psw} onChange={handlePsw}
+    <input type="password" value={password} onChange={handlePsw}
      placeholder="Enter Password" required/>
 
     <label>
@@ -41,6 +68,11 @@ export default function Login() {
       
       <button type="submit" className="signupbtn">Login</button>
       <button type="button" className="cancelbtn">Cancel</button>
+      <div>
+        {errors.map((err) => (
+          <p id="error"key={err}>{err}</p>
+        ))}
+      </div>
     </div>
   </div>
 </form> 

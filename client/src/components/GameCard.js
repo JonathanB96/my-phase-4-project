@@ -2,14 +2,17 @@ import React,{useState} from 'react'
 import './GameCard.css'
 
 
-export default function GameCard({game, setGameUser, setGameComments}) {
+export default function GameCard({game, setGameUser, setGameComments, overlay}) {
   const [btn, setBtn] = useState(true)
 //   const [reviews, setReviews] = useState([])
+
+
   function handleClick(){
    console.log(game.reviews) 
    console.log(game.users)
     setBtn(!btn)    
   }
+  
   return<>
   <div className='card'>
   
@@ -18,9 +21,7 @@ export default function GameCard({game, setGameUser, setGameComments}) {
      <img className='card-img' src={game.image_url} alt={game.title}/>
 
     
-    <button className="card-btn" onClick={handleClick} style={{background: !btn? "rgba(0, 0, 0, 0.5)": "#000"}}>{!btn?"Hide Reviews": "Show Reviews"}</button>
-  </div>
-  
-  
+    <button className="card-btn" onClick={overlay} style={{background: !btn? "rgba(0, 0, 0, 0.5)": "#000"}}>{!btn?"Hide Reviews": "Show Reviews"}</button>
+  </div>  
   </>
 }

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :games, only: [:index, :show]
   # get '/games', to: 'games#index'
   get '/reviews', to: 'reviews#index'
+  get '/reviews/:id', to: 'reviews#clicked_game_reviews'
   # get '/games/:id', to: 'games#show'
   get '/users', to: 'users#index'
 

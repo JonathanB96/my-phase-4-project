@@ -1,14 +1,16 @@
 import React from 'react'
 import { NavLink } from "react-router-dom";
-import { useHistory } from 'react-router';
 import './NavBar.css'
 
 export default function NavBar({user, setUser}) {
-  
+
   function handleLogoutClick() {
+    
     fetch("/logout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
         setUser(null);
+        console.log("logged out!")
+      
       }
     });
   }

@@ -10,9 +10,10 @@ class GamesController < ApplicationController
        
         game = Game.find(params[:id])
 
-        render json: game, status: :ok
+        render json: game,  status: :ok
     
     end
+   
 
     private
 

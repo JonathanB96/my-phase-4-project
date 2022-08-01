@@ -1,29 +1,29 @@
 import React, {useState}from 'react'
+import { useHistory } from 'react-router-dom'
 import "./Signup.css"
 
 export default function Signup() {
 
   const[username, setUsername]=useState('')
-  const[psw, setPsw]=useState('')
-  const[psw2, setPsw2]=useState('')
-
+  const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [errors, setErrors] = useState([]);
+ 
   function handleUsername(e){
     setUsername(e.target.value)
     
   }
 
   function handlePsw(e){
-    setPsw(e.target.value)
+    setPassword(e.target.value)
     
   }
   function handlePsw2(e){
-    setPsw2(e.target.value)
+    setPasswordConfirmation(e.target.value)
     
   }
-  
-
-  
-  
+  const history = useHistory()
+    
 
   return<>
   
@@ -38,11 +38,11 @@ export default function Signup() {
      placeholder="Enter Username"required/>
 
     <label><b>Password</b></label>
-    <input type="password" value={psw} onChange={handlePsw}
+    <input type="password" value={password} onChange={handlePsw}
      placeholder="Enter Password" required/>
 
     <label><b>Repeat Password</b></label>
-    <input type="password" value={psw2} onChange={handlePsw2} 
+    <input type="password" value={passwordConfirmation} onChange={handlePsw2} 
     placeholder="Repeat Password" required/>
 
     <label>
