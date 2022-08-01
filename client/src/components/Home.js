@@ -4,11 +4,25 @@ import './Home.css'
 
 
 export default function Home({user}) {
-  
+  const[userReviews, setUserReviews]=useState([])  
+  console.log(user.reviews[0].game)
  if (user){
   return(<div >
+    <div>
+      <h1>MY REVIEWS</h1>
+    </div>
 
-    Home with user
+  {user.reviews.map((review)=>{
+    return<div key={review.id}>
+      <h2>{review.game.title}</h2>
+      <h3>Comment</h3>
+      
+      <p>{review.comments}</p>
+      <h3>Score</h3>
+      <p>{review.score}</p>
+    </div>
+  })}
+
 
   </div>
 
@@ -20,7 +34,7 @@ export default function Home({user}) {
     <h1>Home without user </h1>
     <h2>Create an account today</h2>
 
-    <p>Already a memmber? <Link to="/loginForm">Login</Link></p>
+    <p>Already a member? <Link to="/loginForm">Login</Link></p>
 
 
 
