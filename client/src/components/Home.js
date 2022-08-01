@@ -4,22 +4,22 @@ import './Home.css'
 
 
 export default function Home({user}) {
-  const[userReviews, setUserReviews]=useState([])  
-  console.log(user.reviews[0].game)
- if (user){
+  const[userReviews, setUserReviews]=useState(user.reviews)  
+  console.log(userReviews)
+ if (user && user.games){
   return(<div >
     <div>
       <h1>MY REVIEWS</h1>
-    </div>
-
-  {user.reviews.map((review)=>{
+      </div>
+    
+  {userReviews.length===0?<h2>No review Found <Link to="/games">Add a review</Link> </h2> :userReviews.map((review)=>{
     return<div key={review.id}>
       <h2>{review.game.title}</h2>
       <h3>Comment</h3>
       
       <p>{review.comments}</p>
-      <h3>Score</h3>
-      <p>{review.score}</p>
+      <h3>Score: {review.score}</h3>
+      <p>{review.comments}</p>
     </div>
   })}
 
@@ -27,6 +27,9 @@ export default function Home({user}) {
   </div>
 
   )
+ } else if(user && user.games ===[]){
+  return<div>No review found <Link to="/games">Add a review</Link></div>
+
  }
  
  return(<div className='home'>
