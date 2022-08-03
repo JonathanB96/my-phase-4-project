@@ -6,7 +6,7 @@ class CreateReviews < ActiveRecord::Migration[7.0]
       t.integer :user_id
       t.integer :game_id
 
-      t.timestamps
+      t.timestamps(:comment, :score, :user_id)
     end
   end
 end

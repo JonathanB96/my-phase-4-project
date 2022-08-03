@@ -27,10 +27,10 @@ function App() {
       <NavBar user={user} setUser={setUser}/>
       <Switch>
       <Route exact path="/">
-          <Home user={user}/>
+          <Home user={user}/>          
         </Route>
         <Route exact path="/games">
-         <GameList/>
+         <GameList user={user}/>
         </Route>
         <Route exact path="/register">
         {user?<Home user={user}/>:<Signup onLogin={setUser}/>} 

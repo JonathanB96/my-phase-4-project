@@ -7,12 +7,12 @@ Rails.application.routes.draw do
   post '/signup', to: 'users#create'
   get '/me', to: 'users#show'
   post '/login', to: 'sessions#create'
+  post '/games/:id/reviews', to: 'games#create'
   delete '/logout', to: 'sessions#destroy'
-  resources :games, only: [:index, :show]
-  # get '/games', to: 'games#index'
+ 
+  get '/games', to: 'games#index'
   get '/reviews', to: 'reviews#index'
   get '/reviews/:id', to: 'reviews#clicked_game_reviews'
-  # get '/games/:id', to: 'games#show'
   get '/users', to: 'users#index'
-
+  get '/games/:id/reviews', to: 'games#show'
 end

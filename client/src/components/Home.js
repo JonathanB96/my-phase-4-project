@@ -1,18 +1,17 @@
-import React, {useState, useEffect}from 'react'
+import React from 'react'
 import {Link} from 'react-router-dom'
 import './Home.css'
 
 
 export default function Home({user}) {
-  const[userReviews, setUserReviews]=useState(user.reviews)  
-  console.log(userReviews)
+ 
  if (user && user.games){
   return(<div >
     <div>
       <h1>MY REVIEWS</h1>
       </div>
     
-  {userReviews.length===0?<h2>No review Found <Link to="/games">Add a review</Link> </h2> :userReviews.map((review)=>{
+  {user.reviews.length===0?<h2>No review Found <Link to="/games">Add a review</Link> </h2> :user.reviews.map((review)=>{
     return<div key={review.id}>
       <h2>{review.game.title}</h2>
       <h3>Comment</h3>
@@ -31,7 +30,6 @@ export default function Home({user}) {
   return<div>No review found <Link to="/games">Add a review</Link></div>
 
  }
- 
  return(<div className='home'>
   <div>
     <h1>Home without user </h1>
