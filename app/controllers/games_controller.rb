@@ -16,9 +16,10 @@ class GamesController < ApplicationController
     end
 
     def create
+    
         game = Game.find(params[:id])
 
-        review = game.reviews.create(review_params)
+        review = game.reviews.create(params[:comments],params[:score],params[:user])
 
         render json: review
 
@@ -27,7 +28,7 @@ class GamesController < ApplicationController
 
     private
     def review_params
-      params.permit(:comment, :score, :user_id)
+      params.permit(:comments, :score, :user)
     end
 
     def not_found

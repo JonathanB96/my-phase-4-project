@@ -5,10 +5,26 @@ class ReviewsController < ApplicationController
 
         render json: reviews
     end
+    def create
+       
+        user = User.find(session[:user_id])
+        if user
+            review = user.reviews.create(review_params)
 
-    def clicked_game_reviews
-      
-        reviews = Review.where("game.id = ?", params[:id])
-        render json: reviews
+            render json: review 
+            
+        else
+            render json: {errors: ["unauthorized"]}, status: :unauthorized   
+        end 
+
+       
+
     end
+    private
+    
+    def review_params
+        params.permit(:comments, :score, :game_id)
+    end
+
+    
 end

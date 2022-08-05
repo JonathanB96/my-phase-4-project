@@ -1,9 +1,11 @@
-import React from 'react'
+import React,{useState} from 'react'
 import {Link} from 'react-router-dom'
 import './Home.css'
 
 
 export default function Home({user}) {
+
+  const[userReviews] = useState([])
  
  if (user && user.games){
   return(<div >

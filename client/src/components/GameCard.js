@@ -1,13 +1,18 @@
 import React,{useState, useEffect} from 'react'
+import { useHistory } from 'react-router-dom'
 import './GameCard.css'
 
 
-export default function GameCard({game, user}) {
+export default function GameCard({game, user, userReviews}) {
   
-  const [gameReviews, setGameReviews]= useState([])
-  const [reviewList, setReviewList] = useState([])
-  const [comments, setComments] = useState("")
+  const [score, setScore]= useState("")
+  const [comments, setComment] = useState("")
+  const [reviewList, setReviewList] = useState(game.reviews)
+  // const history = useHistory()
+
+  
   const [className, setClassName] = useState(true)
+  const [errors, setErrors] = useState([]);
 
 //   const [reviews, setReviews] = useState([])
 
@@ -20,12 +25,35 @@ export default function GameCard({game, user}) {
       
   }
   
-  function closeOverlay() {
-    // document.getElementById("myNav").style.height = "none";
+  function handleComment(e) {
+    setComment(e.target.value)
    
   }
+  function handleScore(e){
+   setScore(e.target.value)
+  }
+  function handleDelete(){
+    
+  }
+  
   function handleSubmit(e){
+    // history.push('/')   
     e.preventDefault()
+    fetch(`/reviews`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({comments:comments, score:parseInt(score) , game_id: game.id}
+      ),
+    }).then((r) => r.json())
+    .then((newReview)=>{
+    console.log(newReview)
+    console.log(reviewList)
+    setReviewList([...reviewList, newReview])
+    })
+    
+
     
   }
 
@@ -55,8 +83,8 @@ export default function GameCard({game, user}) {
        <form className="AddReview" onSubmit={handleSubmit}>
         <h3>Leave a review</h3>
         
-        <textarea placeholder='Your comment here'/> <br></br>
-        <select placeholder='Score'>
+        <textarea placeholder='Your comment here'value={comments} onChange={handleComment}/> <br/>
+        <select placeholder='Score' value={score} onChange={handleScore}>
           <option>score</option>
           <option>1</option>
           <option>2</option>
@@ -77,13 +105,18 @@ export default function GameCard({game, user}) {
       
       <div className="">
         {
-        game.reviews.map((review)=>{
+        reviewList.map((review)=>{
           return <div>
-            <h2>{review.user.username}</h2>
-          <p>{review.comments}</p>
-          <p>Score: {review.score}</p>
-          
-          <hr/>
+            <div>
+              <h2>{review.user.username}</h2>
+              <p>{review.comments}</p>
+              <p>Score: {review.score}</p> 
+              {user.username === review.user.username?<button className="cancelbtn" onClick={handleDelete}>Delete</button>:null}
+                         
+              <hr/>
+            </div>
+
+           
           </div>
 
         })} 
