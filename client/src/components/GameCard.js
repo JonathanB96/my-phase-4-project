@@ -3,11 +3,12 @@ import { useHistory } from 'react-router-dom'
 import './GameCard.css'
 
 
-export default function GameCard({game, user, userReviews}) {
+export default function GameCard({game, user}) {
   
   const [score, setScore]= useState("")
   const [comments, setComment] = useState("")
   const [reviewList, setReviewList] = useState(game.reviews)
+  // const[gameReviewID, setGameReviewID] = useState("0")
   // const history = useHistory()
 
   
@@ -18,10 +19,7 @@ export default function GameCard({game, user, userReviews}) {
 
   function openOverlay() {
     setClassName(!className) 
-    console.log(game)  
-    console.log(user) 
-   
-    // document.getElementBy("myNav").style.display = "block";
+        // document.getElementBy("myNav").style.display = "block";
       
   }
   
@@ -32,9 +30,26 @@ export default function GameCard({game, user, userReviews}) {
   function handleScore(e){
    setScore(e.target.value)
   }
-  function handleDelete(){
-    
-  }
+  function handleDelete(){   
+  
+    const clickedReview = game.reviews.find((review)=>{return review.user.username === user.username})
+    fetch(`/reviews/${clickedReview.id}`,{method: 'DELETE'})
+    .then(r=>{
+      if(r.ok){
+        const newReviewList = reviewList.filter((review)=>{
+          return review.id!==clickedReview.id
+          
+        })
+        setReviewList(newReviewList)
+      
+
+      }
+      })
+  //   .then((deletedReview)=>{
+  //     console.log(deletedReview)
+      
+  //   })
+   }
   
   function handleSubmit(e){
     // history.push('/')   
@@ -57,9 +72,6 @@ export default function GameCard({game, user, userReviews}) {
     
   }
 
-  function handleAddReview(){
-
-  }
   
  
   
@@ -79,8 +91,8 @@ export default function GameCard({game, user, userReviews}) {
         
 
     <div id="" className={className?"reviews": "show"}>
-       {/* <a  class="closebtn" onClick={closeOverlay}>&times;</a> */}
-       <form className="AddReview" onSubmit={handleSubmit}>
+       
+       {user?<form className="AddReview" onSubmit={handleSubmit}>
         <h3>Leave a review</h3>
         
         <textarea placeholder='Your comment here'value={comments} onChange={handleComment}/> <br/>
@@ -97,21 +109,22 @@ export default function GameCard({game, user, userReviews}) {
           <option>9</option>
           <option>10</option>
         </select>
-        <input type="submit" value="Add" disabled={user?false:true}/>
+        <input type="submit" value="Add"/>
 
-      </form>
-
+      </form>:null}
+       
       
       
       <div className="">
         {
         reviewList.map((review)=>{
+          
           return <div>
             <div>
               <h2>{review.user.username}</h2>
               <p>{review.comments}</p>
               <p>Score: {review.score}</p> 
-              {user.username === review.user.username?<button className="cancelbtn" onClick={handleDelete}>Delete</button>:null}
+              {user&& user.username === review.user.username?<button className="cancelbtn" onClick={handleDelete}>Delete</button>:null}
                          
               <hr/>
             </div>

@@ -1,4 +1,4 @@
 class GameReviewSerializer < ActiveModel::Serializer
-  attributes :comments, :score, :user
+  attributes :id, :comments, :score, :user
   belongs_to :user
 end

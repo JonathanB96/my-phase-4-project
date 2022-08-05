@@ -9,10 +9,9 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   post '/reviews', to: 'reviews#create'
   delete '/logout', to: 'sessions#destroy'
- 
+  delete '/reviews/:id', to: 'reviews#destroy'
   get '/games', to: 'games#index'
   get '/reviews', to: 'reviews#index'
-  get '/reviews/:id', to: 'reviews#clicked_game_reviews'
   get '/users', to: 'users#index'
   get '/games/:id/reviews', to: 'games#show'
 end

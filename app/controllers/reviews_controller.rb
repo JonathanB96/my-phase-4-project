@@ -16,9 +16,18 @@ class ReviewsController < ApplicationController
         else
             render json: {errors: ["unauthorized"]}, status: :unauthorized   
         end 
+    end
 
-       
-
+    def destroy
+        user = User.find(session[:user_id])
+        if user
+            review = user.reviews.find(params[:id])
+            review.destroy
+            head  :no_content 
+            
+        else
+            render json: {errors: ["unauthorized"]}, status: :unauthorized   
+        end 
     end
     private
     
