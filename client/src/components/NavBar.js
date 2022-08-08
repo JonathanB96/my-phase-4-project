@@ -42,15 +42,7 @@ export default function NavBar({user, setUser}) {
         Home
       </NavLink>
       </li>
-    <li> <NavLink 
-        to="/news"
-        exact
-        activeStyle={{
-            color: "#00C6A7",
-        }}
-      >
-        News
-      </NavLink></li>
+    
     <li><NavLink
         to="/games"
         exact
@@ -60,15 +52,7 @@ export default function NavBar({user, setUser}) {
       >
         Games
       </NavLink></li>
-    <li> <NavLink
-        to="/Reviews"
-        exact
-        activeStyle={{
-            color: "#00C6A7",
-        }}
-      >
-        Reviews
-      </NavLink></li>
+   
   </ul>
 
   <ul>

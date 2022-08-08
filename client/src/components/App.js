@@ -4,19 +4,22 @@ import {Switch, Route} from 'react-router-dom'
 import Signup from './Signup';
 import Login from './Login'
 import Home from './Home';
-import News from './News';
+
 import GameList from './GameList';
 
 
 function App() {
   
   const [user, setUser] = useState(null) 
+  const [userReviews, setUserReviews] = useState([])
 
   useEffect(() => {
     // auto-login
     fetch("/me").then((r) => {
       if (r.ok) {
-        r.json().then((user) => setUser(user));
+        r.json().then((user) => {setUser(user)
+        setUserReviews(user.reviews)
+        } );
       }
     });
   }, []);
@@ -27,10 +30,10 @@ function App() {
       <NavBar user={user} setUser={setUser}/>
       <Switch>
       <Route exact path="/">
-          <Home user={user}/>          
+          <Home user={user} userReviews={userReviews} setUserReviews={setUserReviews}/>          
         </Route>
         <Route exact path="/games">
-         <GameList user={user}/>
+         <GameList user={user} userReviews={userReviews} setUserReviews={setUserReviews}/>
         </Route>
         <Route exact path="/register">
         {user?<Home user={user}/>:<Signup onLogin={setUser}/>} 
@@ -38,9 +41,7 @@ function App() {
         <Route exact path="/loginForm"> 
         {user?<Home user={user}/>:<Login onLogin={setUser}/>}               
         </Route>
-        <Route exact path="/news">
-          <News/>                    
-        </Route>
+       
       </Switch>
 
       

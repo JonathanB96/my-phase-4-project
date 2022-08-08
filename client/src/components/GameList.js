@@ -3,7 +3,7 @@ import GameCard from './GameCard';
 import SearchBar from './SearchBar';
 import './GameList.css'
 
-export default function GameList({user}) {
+export default function GameList({user, userReviews, setUserReviews}) {
 
   const [games, setGames] = useState([])
   const [gameReviews, setGameReviews] = useState([])
@@ -23,7 +23,8 @@ export default function GameList({user}) {
             
             <div id='search'><SearchBar/></div>
             <div className='container'>{games.map((game)=>{
-                return <GameCard game={game} key={game.id} user={user}/>
+                return <GameCard game={game} key={game.id} user={user} 
+                userReviews={userReviews} setUserReviews={setUserReviews} />
             })}
             </div>
         </div>

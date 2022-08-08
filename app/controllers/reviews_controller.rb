@@ -28,6 +28,21 @@ class ReviewsController < ApplicationController
         else
             render json: {errors: ["unauthorized"]}, status: :unauthorized   
         end 
+
+    end
+
+    def update 
+        user = User.find(session[:user_id])
+        if user
+            review = user.reviews.find(params[:id])
+            review.update(review_params)
+           render json: review
+            
+        else
+            render json: {errors: ["unauthorized"]}, status: :unauthorized   
+        end 
+        
+
     end
     private
     
