@@ -3,15 +3,23 @@ import { useHistory } from 'react-router-dom'
 import './GameCard.css'
 
 
-export default function GameCard({game, user, userReviews, setUserReviews}) {
+export default function GameCard({game, user}) {
   
   const [score, setScore]= useState("")
   const [comments, setComment] = useState("")
-  const [reviewList, setReviewList] = useState(game.reviews)  
+  const [reviewList, setReviewList] = useState([])  
   const [className, setClassName] = useState(true)
   const [newScore, setNewScore] = useState("")
   const [newComment, setNewComment]= useState("")
+  
+  useEffect(()=>{
+    fetch(`/games/${game.id}/reviews`)
+    .then(r=>r.json())
+    .then(gameReviews=>{
+      setReviewList(gameReviews)    
+    })
 
+  },[])
 
   
 
@@ -51,31 +59,15 @@ export default function GameCard({game, user, userReviews, setUserReviews}) {
       })
    }
   
-  function handleSubmit(e){
-    // history.push('/')   
-    e.preventDefault()
-    fetch(`/reviews`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({comments:comments, score:parseInt(score) , game_id: game.id}
-      ),
-    }).then((r) => r.json())
-    .then((newReview)=>{
-    console.log(newReview)
-    // console.log(reviewList)
-
-    setReviewList([...reviewList, newReview])
-    // console.log([...reviewList, newReview])
-    console.log(reviewList)
-    })    
+  function onAddReview(newReview){
+    setReviewList([...reviewList, newReview])      
+    
   }
   function handleEdit(e){
-    // history.push('/')   
+    const clickedReview = reviewList.find((review)=>{return review.user.username === user.username})
     e.preventDefault()
-    fetch(`/reviews`, {
-      method: "POST",
+    fetch(`/reviews/${clickedReview.id}`, {
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
@@ -83,12 +75,21 @@ export default function GameCard({game, user, userReviews, setUserReviews}) {
       ),
     }).then((r) => r.json())
     .then((newReview)=>{
-    console.log(newReview)
-    const newList= reviewList.filter((review)=>{
-      return review.user.username!== user.username
-    })  
-    setReviewList([...newList, newReview])
+    // console.log(newReview)
+    // const newList= reviewList.filter((review)=>{
+    //   return review.user.username!== user.username
+    // })  
+    // setReviewList([...newList, newReview])
+      const newList = reviewList.map((review)=>{
+        if(review.id === newReview.id){
+          return newReview
+        }
+        else {
+          return review
+        }
+      })
 
+     setReviewList(newList)
    
     })    
   }
@@ -114,7 +115,22 @@ export default function GameCard({game, user, userReviews, setUserReviews}) {
 
     <div id="" className={className?"reviews": "show"}>
        
-       {user?<form className="AddReview" onSubmit={handleSubmit}>
+       {user?<form className="AddReview" onSubmit={(e)=>{
+          e.preventDefault()
+          fetch(`/reviews`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({comments:comments, score:parseInt(score) , game_id: game.id}
+            ),
+          }).then((r) => r.json())
+          .then((newReview)=>{
+          
+              onAddReview(newReview)  
+          
+          })    
+       }}>
         <h3>Leave a review</h3>
         
         <textarea placeholder='Your comment here'value={comments} onChange={handleComment}/> <br/>
@@ -180,11 +196,5 @@ export default function GameCard({game, user, userReviews, setUserReviews}) {
     </div>
     
 </div> 
-
- 
-
-
-
-
   </>
 }

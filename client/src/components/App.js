@@ -23,6 +23,10 @@ function App() {
       }
     });
   }, []);
+  function handleAddReview(newReview){
+    const updatedReviewArray = [...userReviews, newReview];
+    setUserReviews(updatedReviewArray);
+  }
 
 
   return (
@@ -33,7 +37,7 @@ function App() {
           <Home user={user} userReviews={userReviews} setUserReviews={setUserReviews}/>          
         </Route>
         <Route exact path="/games">
-         <GameList user={user} userReviews={userReviews} setUserReviews={setUserReviews}/>
+         <GameList user={user} userReviews={userReviews} onAddReview={handleAddReview}/>
         </Route>
         <Route exact path="/register">
         {user?<Home user={user}/>:<Signup onLogin={setUser}/>} 

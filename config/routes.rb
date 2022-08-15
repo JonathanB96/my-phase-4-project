@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get '/me', to: 'users#show'
   post '/login', to: 'sessions#create'
   post '/reviews', to: 'reviews#create'
-  post '/reviews/:id', to: 'reviews#update'
+  patch '/reviews/:id', to: 'reviews#update'
   delete '/logout', to: 'sessions#destroy'
   delete '/reviews/:id', to: 'reviews#destroy'
   get '/games', to: 'games#index'
