@@ -35,7 +35,7 @@ export default function NavBar({user, setUser}) {
         to="/"
         exact
         activeStyle={{
-            color: "#00C6A7",
+            color: "#599bb3",
             
         }}
       >
@@ -47,7 +47,7 @@ export default function NavBar({user, setUser}) {
         to="/games"
         exact
         activeStyle={{
-            color: "#00C6A7",
+            color: "#599bb3",
         }}
       >
         Games
@@ -61,7 +61,7 @@ export default function NavBar({user, setUser}) {
         to="/register"
         exact
         activeStyle={{
-            color: "#00C6A7",
+            color: "#599bb3",
         }}
       >
       {user? user.username: "Sign Up"}
@@ -72,7 +72,7 @@ export default function NavBar({user, setUser}) {
         onClick={handleLogoutClick}
         exact
         activeStyle={{
-            color: "#00C6A7",
+            color: "#599bb3",
         }}
       >
         {user? "Logout": "Login"}

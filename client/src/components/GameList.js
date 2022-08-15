@@ -18,7 +18,7 @@ export default function GameList({user, onAddReview}) {
       });
   }, []);
   
-  
+ //Search 
   function handleSearch(e){
     if(e.target.value===""){
       setGameList(games)

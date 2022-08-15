@@ -11,6 +11,7 @@ export default function GameCard({game, user}) {
   const [className, setClassName] = useState(true)
   const [newScore, setNewScore] = useState("")
   const [newComment, setNewComment]= useState("")
+  const [hasAddedReview, setHasAddedReview] = useState(false)
   
   useEffect(()=>{
     fetch(`/games/${game.id}/reviews`)
@@ -53,7 +54,8 @@ export default function GameCard({game, user}) {
           return review.id!=clickedReview.id
           
         })
-        setReviewList(newReviewList)     
+        setReviewList(newReviewList)  
+        setHasAddedReview(false)   
 
       }
       })
@@ -75,12 +77,7 @@ export default function GameCard({game, user}) {
       ),
     }).then((r) => r.json())
     .then((newReview)=>{
-    // console.log(newReview)
-    // const newList= reviewList.filter((review)=>{
-    //   return review.user.username!== user.username
-    // })  
-    // setReviewList([...newList, newReview])
-      const newList = reviewList.map((review)=>{
+          const newList = reviewList.map((review)=>{
         if(review.id === newReview.id){
           return newReview
         }
@@ -90,6 +87,7 @@ export default function GameCard({game, user}) {
       })
 
      setReviewList(newList)
+     setNewComment("")
    
     })    
   }
@@ -127,7 +125,9 @@ export default function GameCard({game, user}) {
           }).then((r) => r.json())
           .then((newReview)=>{
           
-              onAddReview(newReview)  
+              onAddReview(newReview) 
+              setHasAddedReview(true) 
+              setComment("")
           
           })    
        }}>
@@ -147,7 +147,7 @@ export default function GameCard({game, user}) {
           <option>9</option>
           <option>10</option>
         </select>
-        <input type="submit" value="Add"/>
+        <input type="submit" value="Add" disabled={hasAddedReview? true: false}/>
 
       </form>:null}
        
