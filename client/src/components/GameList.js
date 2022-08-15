@@ -32,7 +32,7 @@ export default function GameList({user, onAddReview}) {
   
   return (<div>
             
-            <div><input type="text" placeholder='Search for a game' onChange={handleSearch}/></div>
+            <div><input type="text" id='search' placeholder='Search for a game' onChange={handleSearch}/></div>
             <div className='container'>{gameList &&
                 gameList.map((game)=>{
                 return <GameCard game={game} key={game.id} 

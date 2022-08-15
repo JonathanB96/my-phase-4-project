@@ -1,23 +1,25 @@
 .container {  display: grid;
   display: grid; 
   grid-auto-columns: 1fr; 
-  grid-template-columns: 1fr 1fr 1fr; 
-  grid-template-rows: 1fr 1fr; 
-  gap: 0px 0px; 
+ 
+  gap: 10px 10px; 
   grid-template-areas: 
     ". . . . "
     ". . . . "; 
+
+
+
   }
   .AddReview{
     text-align: center;
   }
   
   
-   img.recipe-img{
-       max-width: 250px;
-       height: 250px;
-       border-radius: none
-   }
+   /* img.recipe-img{
+       max-width: 300px;
+       height: 300px;
+       border-radius: 5px
+   } */
    h1{
        font-size: 2.2em;
        text-align: center;
@@ -98,11 +100,26 @@
     }
 
     .container{
-        display: flex; 
-     
-       flex-direction: column;
-        
+       display: flex;      
+       flex-direction: column;        
      }
+     .card{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      text-align: center;
+      padding: 0 auto;
+      
+     }
+     .card-img{
+      margin: 0 auto;
+      width: 400px;
+      height: 400px;
+      margin-bottom: 20px;
+     }
+     .card-btn{
+      margin: 0 auto;
+      }
   }
 
 @media screen and (max-width: 600px) {

@@ -153,7 +153,7 @@ export default function GameCard({game, user}) {
        
       
       
-      <div className="">
+      <div className="slideInDown">
         {
         reviewList.map((review)=>{
           
