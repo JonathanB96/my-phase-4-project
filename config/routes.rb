@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  namespace :api do
+
     get '/hello', to: 'application#hello_world'
     post '/signup', to: 'users#create'
     get '/me', to: 'users#show'
@@ -15,10 +15,8 @@ Rails.application.routes.draw do
     get '/games', to: 'games#index'
     get '/reviews', to: 'reviews#index'
     get '/users', to: 'users#index'
-    get '/games/:id/reviews', to: 'games#show'
+    get '/games/:id/reviews', to: 'games#show'  
 
-  end
-
-  get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
+   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
  
 end

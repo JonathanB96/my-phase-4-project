@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.9992ef8d.css",
+    "main.js": "/static/js/main.e7eb385f.js",
+    "static/js/787.c4e7f8f9.chunk.js": "/static/js/787.c4e7f8f9.chunk.js",
+    "static/media/cosmic-background-with-colorful-laser-lights.jpg": "/static/media/cosmic-background-with-colorful-laser-lights.9fcd34d2d3880741156d.jpg",
+    "index.html": "/index.html",
+    "main.9992ef8d.css.map": "/static/css/main.9992ef8d.css.map",
+    "main.e7eb385f.js.map": "/static/js/main.e7eb385f.js.map",
+    "787.c4e7f8f9.chunk.js.map": "/static/js/787.c4e7f8f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9992ef8d.css",
+    "static/js/main.e7eb385f.js"
+  ]
+}
