@@ -1,24 +1,10 @@
-# README
+# Gameland
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Overview
 
-Things you may want to cover:
+All your  favorite games in on place. You can find
+what you need here plus you can quickly search, find and even leave  a review
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Usage
+A user can either register to the site or log into an existing account.
+In the 'Games' section, each 'game card' has a 'show review' button that displays  the reviews associated with that game. A search bar is provided to help you find a particular game by name.

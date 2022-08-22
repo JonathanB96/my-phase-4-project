@@ -1,12 +1,6 @@
 class UsersController < ApplicationController
 
-    def index
-        users = User.all 
-
-        render json: users
-
-    end
-
+    #user Signup
     def create
         user = User.create(user_params)
         session[:user_id] ||= user.id 
@@ -16,7 +10,7 @@ class UsersController < ApplicationController
           render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
         end
     end
-
+     # Auto-login
     def show
         user = User.find(session[:user_id])
             if user
