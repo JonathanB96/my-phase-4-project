@@ -16,12 +16,14 @@ class GamesController < ApplicationController
     end
 
     def create
-    
+        
         game = Game.find(params[:id])
-
-        review = game.reviews.create(params[:comments],params[:score],params[:user])
-
-        render json: review
+        if game
+            review = game.reviews.create(review_params)
+            render json: review
+        else 
+            render json: {errors: ["unauthorized"]}, status: :unauthorized 
+        end
 
     end
    
@@ -32,6 +34,6 @@ class GamesController < ApplicationController
     end
 
     def not_found
-        render json: {errors: ["not authorized"]}, status: :unauthorized
+        render json: {errors: ["not found"]}, status: :not_found
     end
 end
