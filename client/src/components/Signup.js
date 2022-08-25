@@ -1,5 +1,4 @@
 import React, {useState}from 'react'
-import { useHistory } from 'react-router-dom'
 import "./Signup.css"
 
 export default function Signup({onLogin}) {
@@ -8,7 +7,7 @@ export default function Signup({onLogin}) {
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [errors, setErrors] = useState([]);
-  const [isLoading, setIsLoading] = useState(false)
+  
  
   function handleUsername(e){
     setUsername(e.target.value)
@@ -26,7 +25,7 @@ export default function Signup({onLogin}) {
   function handleSubmit(e) {
     e.preventDefault();
     setErrors([]);
-    setIsLoading(true);
+    
     fetch("/signup", {
       method: "POST",
       headers: {
@@ -38,7 +37,7 @@ export default function Signup({onLogin}) {
         password_confirmation: passwordConfirmation        
       }),
     }).then((r) => {
-      setIsLoading(false);
+     
       if (r.ok) {
         r.json().then((user) => onLogin(user));
         console.log("Signed up")

@@ -1,15 +1,11 @@
 import React, {useState}from 'react'
-import { useHistory } from 'react-router-dom'
 import "./Signup.css"
 
 export default function Login({onLogin}) {
 
   const[username, setUsername]=useState('')
   const[password, setPassword]=useState('')
-  const [errors, setErrors] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  // const history = useHistory()
-  
+  const [errors, setErrors] = useState([])  
 
   function handleUsername(e){
     setUsername(e.target.value)
@@ -17,15 +13,12 @@ export default function Login({onLogin}) {
   }
 
   function handlePsw(e){
-    setPassword(e.target.value)
-    
-  }
-  
+    setPassword(e.target.value)    
+  }  
   
   function handleSubmit(e) {
     e.preventDefault();
     
-    setIsLoading(true);
     fetch("/login", {
       method: "POST",
       headers: {
@@ -33,9 +26,7 @@ export default function Login({onLogin}) {
       },
       body: JSON.stringify({ username, password}),
     }).then((r) => {
-      setIsLoading(false);
-     
-      // history.push('/')
+           
       if (r.ok) {
         r.json().then((user) => onLogin(user));
         console.log("logged in!")
@@ -71,8 +62,7 @@ export default function Login({onLogin}) {
       </div>
     </div>
   </div>
-</form> 
-  
+</form>  
   
   </>
 }

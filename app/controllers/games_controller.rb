@@ -1,11 +1,12 @@
 class GamesController < ApplicationController
     rescue_from  ActiveRecord::RecordNotFound, with: :not_found
+    #Game list
     def index
         games = Game.all 
 
         render json: games
     end
-
+    #Game reviews
     def show
        
         game = Game.find(params[:id])

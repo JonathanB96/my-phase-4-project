@@ -1,5 +1,4 @@
 import React,{useState, useEffect} from 'react'
-import { useHistory } from 'react-router-dom'
 import './GameCard.css'
 
 
@@ -20,11 +19,9 @@ export default function GameCard({game, user}) {
       setReviewList(gameReviews)    
     })
 
-  },[])
+  },[])  
 
-  
-
-  function openOverlay() {
+  function showReview() {
     setClassName(!className)       
   }
   
@@ -41,8 +38,7 @@ export default function GameCard({game, user}) {
   }
   function handleNewScore(e){
     setNewScore(e.target.value)
-   }
-  
+   }  
 
   function handleDelete(){   
     console.log(reviewList)
@@ -51,20 +47,20 @@ export default function GameCard({game, user}) {
     .then(r=>{
       if(r.ok){
         const newReviewList = reviewList.filter((review)=>{
-          return review.id!=clickedReview.id
-          
+          return review.id!=clickedReview.id          
         })
         setReviewList(newReviewList)  
         setHasAddedReview(false)   
 
       }
       })
-   }
+    
+    }
   
   function onAddReview(newReview){
-    setReviewList([...reviewList, newReview])      
-    
+    setReviewList([...reviewList, newReview])     
   }
+
   function handleEdit(e){
     const clickedReview = reviewList.find((review)=>{return review.user.username === user.username})
     e.preventDefault()
@@ -85,34 +81,24 @@ export default function GameCard({game, user}) {
           return review
         }
       })
-
      setReviewList(newList)
      setNewComment("")
    
     })    
-  }
-
-
-  
- 
-  
+  }  
   return<>
-
-
   <div className='container-2'>
     <div className='card'>
     <h4>{game.title}</h4> 
           <h3>{game.year}</h3>
-        <img className='card-img' src={game.image_url} alt={game.title}/>
-
-        
-        <button className="card-btn" onClick={openOverlay} style={{background:"#000"}}>{className?"Show Reviews": "Hide reviews"}</button>
+        <img className='card-img' src={game.image_url} alt={game.title}/>        
+        <button className="card-btn" onClick={showReview} style={{background:"#000"}}>{className?"Show Reviews": "Hide reviews"}</button>
     </div>
   
         
 
     <div id="" className={className?"reviews": "show"}>
-       
+       {/*Review form */}
        {user?<form className="AddReview" onSubmit={(e)=>{
           e.preventDefault()
           fetch(`/reviews`, {
@@ -127,12 +113,10 @@ export default function GameCard({game, user}) {
           
               onAddReview(newReview) 
               setHasAddedReview(true) 
-              setComment("")
-          
+              setComment("")          
           })    
        }}>
-        <h3>Leave a review</h3>
-        
+        <h3>Leave a review</h3>        
         <textarea placeholder='Your comment here'value={comments} onChange={handleComment}/> <br/>
         <select placeholder='Score' value={score} onChange={handleScore}>
           <option>SCORE</option>
@@ -148,11 +132,8 @@ export default function GameCard({game, user}) {
           <option>10</option>
         </select>
         <input type="submit" value="Add" disabled={hasAddedReview? true: false}/>
-
-      </form>:null}
-       
-      
-      
+      </form>:null}      
+      {/* Review list */}
       <div className="slideInDown">
         {
         reviewList.map((review)=>{
@@ -164,6 +145,7 @@ export default function GameCard({game, user}) {
               <p>Score: {review.score}</p> 
               {user&& user.username === review.user.username?<button className="cancelbtn" onClick={handleDelete}>Delete</button>:null}
               {user&& user.username === review.user.username?
+                //Edit Review Form
                 <form onSubmit={handleEdit}>
                   <textarea placeholder='Edit your comment' value={newComment} onChange={handleNewComment}/>
                   <select placeholder='Score' value={newScore} onChange={handleNewScore}>
@@ -180,21 +162,13 @@ export default function GameCard({game, user}) {
                     <option>10</option>
                   </select>
                   <input type="submit" value="Edit"/>
-
-                </form>:null}
-                         
+                </form>:null}                         
               <hr/>
-            </div>
-
-           
+            </div>           
           </div>
-
-        })} 
-          
+        })}           
       </div>
-
-    </div>
-    
+    </div>    
 </div> 
   </>
 }
